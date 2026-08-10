@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.partnerships-section {
+    background-color: #2d5b1f;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    min-height: 100vh;
+}
+
+/* TITLE */
+.partnerships-section h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.subtitle {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+/* GRID */
+.partners-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 60px 80px;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+/* LOGO BOX */
+.partner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* IMAGE STYLE (CONSISTENT SIZE) */
+.partner img {
+    height: 290px;   /* increased from 70px */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* HOVER ONLY EFFECT */
+.partner img:hover {
+    transform: scale(1.15);
+    filter: brightness(1.1);
+}
+
+/* REMOVE LINK STYLE */
+a {
+    text-decoration: none;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

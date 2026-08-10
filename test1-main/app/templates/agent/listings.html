@@ -1,0 +1,83 @@
+{% load static %}
+
+<section class="listings">
+
+<div class="box-container">
+
+{% for property in properties %}
+
+<div class="box">
+
+   <!-- AGENT -->
+   <div class="admin">
+      <h3>{{ property.agent.username|first|upper }}</h3>
+      <div>
+         <p>{{ property.agent.username }}</p>
+         <span>{{ property.created_at|date:"M d, Y" }}</span>
+      </div>
+   </div>
+
+   <!-- IMAGE -->
+   <div class="thumb">
+
+      <p class="total-images">
+         <i class="far fa-image"></i>
+         <span>{{ property.images.count|default:"0" }}</span>
+      </p>
+
+      <p class="type">
+         <span>{{ property.get_property_type_display }}</span>
+         <span>{{ property.get_listing_status_display }}</span>
+      </p>
+
+      {% if property.images.all %}
+         <img src="{{ property.images.first.image.url }}" alt="Property Image">
+      {% elif property.image %}
+         <img src="{{ property.image.url }}" alt="Property Image">
+      {% else %}
+         <img src="{% static 'images/no-image.png' %}" alt="No Image">
+      {% endif %}
+
+   </div>
+
+   <!-- TITLE -->
+   <h3 class="name">{{ property.title }}</h3>
+
+   <!-- LOCATION -->
+   <p class="location">
+      <i class="fas fa-map-marker-alt"></i>
+      <span>{{ property.location }}, {{ property.city }}</span>
+   </p>
+
+   <!-- DETAILS -->
+   <div class="flex">
+      <p><i class="fas fa-bed"></i> <span>{{ property.bedrooms }}</span></p>
+      <p><i class="fas fa-bath"></i> <span>{{ property.bathrooms }}</span></p>
+      <p><i class="fas fa-expand"></i> <span>{{ property.floor_area }} sqm</span></p>
+   </div>
+
+   <!-- ACTIONS -->
+   <div style="margin-top:1rem; display:flex; gap:1rem;">
+      <a href="{% url 'property_detail' property.id %}" class="inline-btn">View </a>
+
+      <a href="{% url 'edit_property' property.id %}" class="inline-btn">Edit</a>
+
+      <form action="{% url 'delete_property' property.id %}" method="post">
+         {% csrf_token %}
+         <button type="submit" class="inline-btn" 
+            onclick="return confirm('Are you sure you want to delete this property?');">
+            Delete
+         </button>
+      </form>
+
+   </div>
+
+</div>
+
+{% empty %}
+<p style="text-align:center; font-size:1.6rem;">No properties listed.</p>
+{% endfor %}
+
+</div>
+
+</section>

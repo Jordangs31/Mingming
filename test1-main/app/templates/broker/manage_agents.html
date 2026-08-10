@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Agents</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Manage Agents</h1>
+            <p class="text-center">Active Agents: {{ active_agents }} | Verified Agents: {{ verified_agents }}</p>
+            <div class="box-container">
+                {% for agent in agents %}
+                <div class="property-card">
+                    <div class="content">
+                        <h3>{{ agent.first_name|default:agent.username }} {{ agent.last_name }}</h3>
+                        <p>{{ agent.email }}</p>
+                        <p>Phone: {{ agent.phone|default:'Not provided' }}</p>
+                        <p>Status: {% if agent.is_active %}Active{% else %}Inactive{% endif %}</p>
+                        <p>Verified: {% if agent.is_verified %}Yes{% else %}No{% endif %}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No agents found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+</body>
+</html>

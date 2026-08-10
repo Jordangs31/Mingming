@@ -1,0 +1,10 @@
+{% load static %}
+<h1>Delete Property</h1>
+
+<p>Are you sure you want to delete "{{ property.title }}"?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="delete-btn">Yes, Delete</button>
+    <a href="{% url 'agent_dashboard' %}" class="btn">Cancel</a>
+</form>

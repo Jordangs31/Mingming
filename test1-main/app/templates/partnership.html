@@ -1,0 +1,30 @@
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/partnerships.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="partnerships-section">
+    <h1>PARTNERSHIPS</h1>
+    <p class="subtitle">
+        As of now we have multiple partnerships since our 2018. Here are the companies that we are working with.
+    </p>
+
+    <div class="partners-container">
+        {% for partner in partners %}
+        <div class="partner">
+            <a href="{{ partner.website }}" target="_blank">
+                {% if partner.logo %}
+                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+                {% endif %}
+            </a>
+        </div>
+        {% empty %}
+        <p>No partners found</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

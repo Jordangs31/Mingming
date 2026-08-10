@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Our Agents</title>
+
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+{% include 'components/header.html' %}
+
+<section class="agents">
+
+   <h1 class="heading">Agent Directory</h1>
+   <form method="get" style="display:flex;gap:1rem;flex-wrap:wrap;margin:2rem 0;">
+      <input name="q" value="{{ filters.q }}" placeholder="Search agent">
+      <input name="location" value="{{ filters.location }}" placeholder="Location">
+      <input name="specialization" value="{{ filters.specialization }}" placeholder="Specialization">
+      <input name="experience" value="{{ filters.experience }}" type="number" placeholder="Min. experience">
+      <select name="sort"><option value="name">Sort by name</option><option value="rating">Sort by rating</option><option value="experience">Sort by experience</option></select>
+      <button class="btn">Search</button>
+   </form>
+
+   <div class="box-container">
+
+      {% for agent in agents %}
+      <div class="box">
+
+         <!-- ICON / AVATAR -->
+         <div class="agent-icon">
+            <i class="fas fa-user-tie"></i>
+         </div>
+
+         <!-- NAME -->
+         <h3>{{ agent.get_full_name|default:agent.username }} {% if agent.is_verified %}✓{% endif %}</h3>
+         <p>{{ agent.agent_profile.title|default:'Licensed Real Estate Agent' }}</p>
+         <p>License: {{ agent.agent_profile.license_number|default:'On file' }}</p>
+         <p>{{ agent.agent_profile.location|default:'Location not listed' }} · {{ agent.agent_profile.years_experience|default:0 }} years</p>
+         <p>{{ agent.listing_count }} listings · {{ agent.sold_count }} sold · ★ {{ agent.agent_profile.rating|default:'New' }}</p>
+
+         <!-- EMAIL -->
+         <p>
+            <i class="fas fa-envelope"></i>
+            {{ agent.email }}
+         </p>
+
+         <!-- PHONE -->
+         <p>
+            <i class="fas fa-phone"></i>
+            {{ agent.phone|default:"No phone" }}
+         </p>
+
+         <!-- STATUS -->
+         {% if agent.is_verified %}
+            <span class="status verified">✔ Verified</span>
+         {% else %}
+            <span class="status not-verified">✖ Not Verified</span>
+         {% endif %}
+
+         <!-- BUTTON -->
+         <a href="{% url 'agent_profile' agent.id %}" class="inline-btn">View Profile</a>
+
+      </div>
+      {% empty %}
+         <p class="empty">No agents found.</p>
+      {% endfor %}
+
+   </div>
+
+</section>
+
+</body>
+</html>

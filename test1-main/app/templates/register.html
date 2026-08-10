@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register</title>
+
+   <!-- font awesome cdn link -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+   <!-- custom css -->
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+   <!-- HEADER -->
+{% include 'components/header.html' %}
+
+<!-- register section starts -->
+
+<section class="form-container">
+
+   <!-- Django messages -->
+   {% if messages %}
+      {% for message in messages %}
+         <p style="color:red; text-align:center;">{{ message }}</p>
+      {% endfor %}
+   {% endif %}
+
+   <form action="" method="post">
+      {% csrf_token %}
+
+      <h3>Create an account!</h3>
+
+      <input type="text" name="name" required maxlength="50"
+         placeholder="Enter your name" class="box">
+
+      <input type="email" name="email" required maxlength="50"
+         placeholder="Enter your email" class="box">
+
+      <input type="password" name="pass" required maxlength="20"
+         placeholder="Enter your password" class="box">
+
+      <input type="password" name="c_pass" required maxlength="20"
+         placeholder="Confirm your password" class="box">
+
+      <!-- USER TYPE -->
+      <select name="user_type" class="box" required>
+         <option value="">Select Account Type</option>
+         <option value="buyer">Buyer</option>
+         <option value="agent">Agent</option>
+         <option value="broker">Broker</option>
+      </select>
+
+      <p>Already have an account?
+         <a href="{% url 'login' %}">Login now</a>
+      </p>
+
+      <input type="submit" value="Register now" class="btn">
+
+   </form>
+
+</section>
+
+<!-- register section ends -->
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

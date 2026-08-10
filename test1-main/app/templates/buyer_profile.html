@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Profile</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Buyer Profile</h1>
+            <div class="box-container">
+                <div class="property-card">
+                    <div class="content">
+                        <h3>{{ buyer.name }}</h3>
+                        <p><strong>Email:</strong> {{ buyer.email }}</p>
+                        <p><strong>Phone:</strong> {{ buyer.phone }}</p>
+                        <p><strong>Location:</strong> {{ buyer.location }}</p>
+                        <p><strong>Membership:</strong> {{ buyer.membership }}</p>
+                        <div class="card-footer">
+                            <a href="#" class="view-btn">Change Password</a>
+                            <a href="#" class="view-btn">Upload Photo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="content">
+                        <h3>Notification Settings</h3>
+                        <p>New listing alerts: Enabled</p>
+                        <p>Price drop notifications: Enabled</p>
+                        <p>Agent reply updates: Enabled</p>
+                        <p>Weekly market digest: Enabled</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+</body>
+</html>

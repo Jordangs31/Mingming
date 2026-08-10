@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Agent Dashboard</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+
+</head>
+<body>
+
+<header class="header">
+
+<nav class="navbar nav-1">
+<div class="flex">
+
+<a href="#" class="logo">AgentPortal</a>
+
+<ul>
+<li><a href="{% url 'agent_dashboard' %}">Dashboard</a></li>
+
+<li>
+<form action="{% url 'logout' %}" method="post">
+{% csrf_token %}
+<button type="submit" class="inline-btn">Logout</button>
+</form>
+</li>
+
+</ul>
+
+</div>
+</nav>
+
+</header>
+
+<!-- BUYERS LIST -->
+<section class="listings">
+<h1 class="heading">Buyers List</h1>
+
+<div class="box-container">
+{% for buyer in buyers %}
+<div class="box">
+<div class="admin">
+<h3>{{ buyer.username|slice:":1"|upper }}</h3>
+<div>
+<p>{{ buyer.username }}</p>
+<span>{{ buyer.email }}</span>
+</div>
+</div>
+
+<div class="flex">
+<p>Phone: <span>{{ buyer.phone }}</span></p>
+<p>Date Joined: <span>{{ buyer.date_joined|date:"M d, Y" }}</span></p>
+</div>
+</div>
+{% empty %}
+<p>No buyers found.</p>
+{% endfor %}
+</div>
+</section>
+
+<!-- AGENT PROPERTIES -->
+<section class="listings">
+<h1 class="heading">My Property Listings</h1>
+
+<div style="text-align:right; margin-bottom:20px;">
+<a href="{% url 'add_property' %}" class="btn">
+<i class="fas fa-plus"></i> Add Property
+</a>
+</div>
+
+<!-- Include listing.html for property boxes with Edit/Delete -->
+{% include "agent/listings.html" %}
+</section>
+
+{% include "components/footer.html" %}
+
+</body>
+</html>

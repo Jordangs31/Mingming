@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Property</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<section class="form-container">
+
+    <form method="POST" enctype="multipart/form-data" class="add-property-form">
+        {% csrf_token %}
+
+        <h3>Add New Property</h3>
+
+        <!-- Render all form fields except image -->
+        {% for field in form %}
+            {% if field.name != "image" %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.errors %}
+                        <span class="error">{{ field.errors }}</span>
+                    {% endif %}
+                </p>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Main Image -->
+        <p>
+            {{ form.image.label_tag }}<br>
+            {{ form.image }}
+            {% if form.image.errors %}
+                <span class="error">{{ form.image.errors }}</span>
+            {% endif %}
+        </p>
+
+        <!-- ✅ ADD THIS (MULTIPLE IMAGE UPLOAD) -->
+        <p>
+            <label for="images">Upload Additional Images</label><br>
+            <input type="file" name="images" id="images" multiple>
+        </p>
+
+        
+        <button type="submit" class="btn">Add Property</button>
+
+        <p>
+            <a href="{% url 'agent_dashboard' %}">← Back to Dashboard</a>
+        </p>
+
+    </form>
+
+</section>
+
+</body>
+</html>

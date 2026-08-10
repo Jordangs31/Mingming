@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC Arabe Realty | Home</title>
+    <link rel="stylesheet" href="{% static 'login/style.css' %}">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f3b2d, #1b4d36);
+            color: #f8f8f8;
+        }
+        .dashboard {
+            width: min(1000px, 92vw);
+            margin: 40px auto;
+            padding: 28px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 18px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+        .hero {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 20px;
+            align-items: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 12px; }
+        .hero p { color: #ecf7ef; line-height: 1.6; }
+        .card {
+            background: rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: 18px;
+        }
+        .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 12px; }
+        .stat { background: rgba(255,255,255,0.12); padding: 16px; border-radius: 12px; }
+        .stat strong { display: block; font-size: 1.7rem; }
+        .btn {
+            display: inline-block;
+            margin-top: 12px;
+            background: #ffd166;
+            color: #1a2e1d;
+            padding: 10px 16px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 999px;
+        }
+        @media (max-width: 720px) {
+            .hero { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="hero">
+            <div>
+                <h1>Welcome to LC Arabe Realty</h1>
+                <p>Browse premium homes, manage buyer activity, and track listing performance from a polished, commercial-grade real estate dashboard.</p>
+                <a class="btn" href="{% url 'register' %}">Create a New Account</a>
+            </div>
+            <div class="card">
+                <h3>Quick Actions</h3>
+                <p>Buyer demo account: <strong>demo_buyer</strong></p>
+                <p>Seller demo account: <strong>demo_seller</strong></p>
+                <p>Admin demo account: <strong>demo_admin</strong></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="stat"><strong>280+</strong><span>Properties sold</span></div>
+            <div class="stat"><strong>1,200+</strong><span>Happy clients</span></div>
+            <div class="stat"><strong>18</strong><span>Cities covered</span></div>
+            <div class="stat"><strong>4.9/5</strong><span>Average rating</span></div>
+        </div>
+
+        <div class="card">
+            <h3>Demo Credentials</h3>
+            <p><strong>Buyer:</strong> demo_buyer / demo1234</p>
+            <p><strong>Seller:</strong> demo_seller / demo1234</p>
+            <p><strong>Admin:</strong> demo_admin / demo1234</p>
+        </div>
+    </div>
+</body>
+</html>

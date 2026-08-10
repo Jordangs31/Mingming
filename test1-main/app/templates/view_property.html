@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ property.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="property-portal">
+        <div class="container property-portal__layout">
+            <div class="property-gallery-card">
+                {% if property.image %}
+                    <div class="main-image-wrap">
+                        <img src="{{ property.image.url }}" class="main-image" id="mainImage" alt="{{ property.title }}">
+                    </div>
+                {% endif %}
+
+                <div class="gallery-grid">
+                    {% for img in property_images %}
+                        {% if img.image %}
+                            <img src="{{ img.image.url }}" class="thumb" alt="{{ property.title }} image">
+                        {% elif img.image_url %}
+                            <img src="{{ img.image_url }}" class="thumb" alt="{{ property.title }} image">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="slider-controls">
+                    <button type="button" id="prevBtn">❮</button>
+                    <button type="button" id="nextBtn">❯</button>
+                </div>
+            </div>
+
+            <div class="property-info-card">
+                <div class="property-portal__header">
+                    <div>
+                        <span class="hero-badge">Premium Listing</span>
+                        <h1>{{ property.title }}</h1>
+                    </div>
+                    <div class="price-tag">₱{{ property.price }}</div>
+                </div>
+
+                <p class="location-line"><i class="fas fa-location-dot"></i> {{ property.location }}, {{ property.city }}, {{ property.province }}</p>
+                <div class="feature-pill-row">
+                    <span>🛏 {{ property.bedrooms }} Beds</span>
+                    <span>🛁 {{ property.bathrooms }} Baths</span>
+                    <span>🚗 {{ property.parking_spaces }} Parking</span>
+                    <span>📐 {{ property.floor_area }} sqm</span>
+                </div>
+                <p class="description-copy">{{ property.description }}</p>
+
+                <div class="detail-badges">
+                    <span class="status-badge">{% if property.is_available %}Available{% else %}Sold{% endif %}</span>
+                    <span class="status-badge">{{ property.get_property_type_display }}</span>
+                    <span class="status-badge">{{ property.get_listing_status_display }}</span>
+                </div>
+
+                <div class="detail-actions">
+                    <a href="{% url 'virtual_tour' property.id %}" class="btn-primary">360° Virtual Tour</a>
+                    <a href="{% url 'contact' %}" class="btn-secondary">Schedule Viewing</a>
+                    <a href="{% url 'contact' %}" class="btn-secondary">Contact Agent</a>
+                </div>
+
+                <div class="info-grid">
+                    <article class="detail-panel">
+                        <h3>Amenities</h3>
+                        <ul>
+                            {% for item in amenities %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                    <article class="detail-panel">
+                        <h3>Features</h3>
+                        <ul>
+                            {% for item in features %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                    <article class="detail-panel">
+                        <h3>Nearby Establishments</h3>
+                        <ul>
+                            <li>Schools and universities within 5 minutes</li>
+                            <li>Retail hubs and cafes nearby</li>
+                            <li>Medical clinics and major transport routes</li>
+                        </ul>
+                    </article>
+                    <article class="detail-panel">
+                        <h3>Mortgage Snapshot</h3>
+                        <ul>
+                            <li>Estimated monthly payment: ₱56,000</li>
+                            <li>Loan term: 20 years</li>
+                            <li>Down payment: 20%</li>
+                        </ul>
+                    </article>
+                    <article class="detail-panel">
+                        <h3>Agent Information</h3>
+                        <p>Licensed property advisor available for full walkthroughs and financing guidance.</p>
+                    </article>
+                    <article class="detail-panel">
+                        <h3>Map Location</h3>
+                        <p>{{ property.location }}, {{ property.city }}, {{ property.province }}</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-shell">
+        <div class="container">
+            <div class="section-heading">
+                <span>Similar Properties</span>
+                <h2>More homes you may like</h2>
+            </div>
+            <div class="property-grid">
+                {% for item in similar_properties %}
+                <article class="property-card-home">
+                    <div class="property-thumb">
+                        {% if item.image %}<img src="{{ item.image.url }}" alt="{{ item.title }}">{% endif %}
+                    </div>
+                    <div class="property-body">
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.city }}, {{ item.province }}</p>
+                        <div class="property-footer">
+                            <strong>₱{{ item.price }}</strong>
+                            <a href="{% url 'property_detail' item.id %}">View</a>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

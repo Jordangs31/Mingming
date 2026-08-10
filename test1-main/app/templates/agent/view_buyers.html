@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Buyers</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header>
+    <h2>Buyer Information</h2>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</header>
+
+<main>
+    <section class="listings">
+        <div class="box-container">
+            {% for buyer in buyers %}
+            <div class="box">
+                <p><strong>Name:</strong> {{ buyer.name }}</p>
+                <p><strong>Email:</strong> {{ buyer.email }}</p>
+                <p><strong>Phone:</strong> {{ buyer.phone }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

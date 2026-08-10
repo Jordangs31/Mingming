@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiry History</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Inquiry History</h1>
+            <div class="box-container">
+                {% for inquiry in inquiries %}
+                <div class="property-card">
+                    <div class="content">
+                        <h3>{{ inquiry.property }}</h3>
+                        <p><strong>Date:</strong> {{ inquiry.date }}</p>
+                        <p><strong>Status:</strong> {{ inquiry.status }}</p>
+                        <p><strong>Buyer Message:</strong> {{ inquiry.message }}</p>
+                        <p><strong>Reply:</strong> {{ inquiry.reply }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No inquiries found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+</body>
+</html>

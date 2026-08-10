@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Properties</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+
+<!-- 🔍 TOP SEARCH BAR -->
+<section class="search-bar">
+
+    <form method="GET" class="search-form">
+
+        <!-- Offer Type -->
+        <div class="field">
+            <label>OFFER TYPE</label>
+            <select name="listing_status">
+                <option value="">For Sale</option>
+            </select>
+        </div>
+
+        <!-- Location -->
+        <div class="field location-field">
+            <label>LOCATION</label>
+            <div class="search-input">
+                <input type="text" name="city" placeholder="Search for a location or project name"
+                       value="{{ request.GET.city }}">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <!-- Property Type -->
+        <div class="field">
+            <label>PROPERTY TYPE</label>
+            <select name="property_type">
+                <option value="">Any</option>
+                <option value="house_lot">House & Lot</option>
+            </select>
+        </div>
+
+        <!-- PRICE (UPDATED ✅) -->
+        <div class="field price-field">
+            <label>PRICE</label>
+
+            <div class="price-inputs">
+                <div class="price-box">
+                    <span>₱</span>
+                    <input type="number" name="min_price" placeholder="Min"
+                           value="{{ request.GET.min_price }}">
+                </div>
+
+                <div class="price-box">
+                    <span>₱</span>
+                    <input type="number" name="max_price" placeholder="Max"
+                           value="{{ request.GET.max_price }}">
+                </div>
+            </div>
+        </div>
+
+        <!-- Beds -->
+        <div class="field">
+            <label>BEDS</label>
+            <select name="bedrooms">
+                <option value="">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3+</option>
+            </select>
+        </div>
+
+        <!-- Filter Button -->
+        <div class="field icon-field">
+            <button type="submit">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+        </div>
+
+    </form>
+
+</section>
+
+
+<section class="search-page">
+
+   <!-- LEFT SIDE -->
+   <div class="search-results">
+
+      <h1 class="heading">Properties</h1>
+
+      <div class="box-container">
+
+         {% for property in properties %}
+         <div class="property-card">
+
+            <div class="image-wrapper">
+               {% if property.image %}
+                  <img src="{{ property.image.url }}">
+               {% else %}
+                  <img src="{% static 'images/no-image.png' %}">
+               {% endif %}
+            </div>
+
+            <div class="content">
+               <h3>₱{{ property.price }}</h3>
+               <p class="title">{{ property.title }}</p>
+
+               <p class="details">
+                  {{ property.floor_area }} sqm • {{ property.lot_area }} lot
+               </p>
+
+               <p class="details">
+                  🛏 {{ property.bedrooms }} Beds • 🛁 {{ property.bathrooms }} Baths • 🚗 Garage
+               </p>
+
+               <div class="card-footer">
+                  <a href="{% url 'property_detail' property.id %}" class="view-btn">View Details</a>
+
+                  <span class="status">
+                     {% if property.is_available %}
+                        Available
+                     {% else %}
+                        Sold
+                     {% endif %}
+                  </span>
+               </div>
+            </div>
+
+         </div>
+         {% empty %}
+            <p>Total Results: {{ properties|length }}</p>
+         {% endfor %}
+
+      </div>
+
+   </div>
+
+</section>
+
+</body>
+</html>

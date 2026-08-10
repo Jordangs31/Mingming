@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites & Compare</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Saved Properties</h1>
+            <div class="box-container">
+                {% for property in favorite_properties %}
+                <div class="property-card">
+                    <div class="image-wrapper">
+                        {% if property.image %}
+                            <img src="{{ property.image.url }}" alt="{{ property.title }}">
+                        {% else %}
+                            <img src="{% static 'images/hero-house.jpg' %}" alt="{{ property.title }}">
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <h3>₱{{ property.price }}</h3>
+                        <p class="title">{{ property.title }}</p>
+                        <p class="details">{{ property.city }}, {{ property.province }}</p>
+                        <div class="card-footer">
+                            <a href="{% url 'property_detail' property.id %}" class="view-btn">View Details</a>
+                            <span class="status">Saved</span>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No favorite properties yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Compare Properties</h1>
+            <div class="box-container">
+                {% for property in compare_properties %}
+                <div class="property-card">
+                    <div class="content">
+                        <h3>{{ property.title }}</h3>
+                        <p><strong>Price:</strong> ₱{{ property.price }}</p>
+                        <p><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+                        <p><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+                        <p><strong>Area:</strong> {{ property.floor_area }} sqm</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No properties to compare.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+</body>
+</html>

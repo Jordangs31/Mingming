@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<h1>Buyer Dashboard</h1>
+<p>Welcome, {{ user.username }}!</p>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="role-message" data-message="{{ message }}" data-user-type="{{ user.user_type }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<p>You are logged in as <b>Buyer</b></p>
+
+<!-- List of Agents as cards -->
+<section class="listings">
+    <h2 class="heading">Available Agents</h2>
+    <div class="box-container">
+        {% if agents %}
+            {% for agent in agents %}
+                <div class="box">
+                    <div class="admin">
+                        <h3>{{ agent.username|slice:":1"|upper }}</h3>
+                        <p>{{ agent.username }}</p>
+                        <span>{{ agent.user_type|capfirst }}</span>
+                    </div>
+                    <div class="flex">
+                        <p>Email: <span>{{ agent.email }}</span></p>
+                        <p>Phone: <span>{{ agent.phone }}</span></p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No agents available at the moment.</p>
+        {% endif %}
+    </div>
+</section>
+{% include 'components/footer.html' %}
+<!-- Links -->
+<a href="{% url 'base' %}" class="inline-btn">Home</a>
+<a href="{% url 'add_review' %}" class="btn">add review</a>
+
+<form action="{% url 'logout' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn">Logout</button>
+</form>
+
+</body>
+</html>

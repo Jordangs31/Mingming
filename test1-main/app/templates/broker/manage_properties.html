@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Properties</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Manage Properties</h1>
+            <div class="box-container">
+                <div class="property-card"><div class="content"><h3>Pending</h3><p>{{ pending_properties.count }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Approved</h3><p>{{ approved_properties.count }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Rejected</h3><p>{{ rejected_properties.count }}</p></div></div>
+            </div>
+
+            <div class="box-container" style="margin-top: 2rem;">
+                {% for property in properties %}
+                <div class="property-card">
+                    <div class="content">
+                        <h3>{{ property.title }}</h3>
+                        <p>{{ property.city }}, {{ property.province }}</p>
+                        <p>Agent: {{ property.agent.first_name|default:property.agent.username }}</p>
+                        <p>Status: {{ property.get_approval_status_display }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No properties found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+</body>
+</html>

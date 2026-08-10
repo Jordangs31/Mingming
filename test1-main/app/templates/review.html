@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Add Review</title>
+
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+{% include 'components/header.html' %}
+
+<section class="form-container">
+
+   <form method="POST" enctype="multipart/form-data" class="add-property-form">
+      {% csrf_token %}
+
+      <h3>Submit Your Review</h3>
+
+      <!-- Render all fields except image -->
+      {% for field in form %}
+         {% if field.name != "image" %}
+            <p>
+               {{ field.label_tag }}<br>
+               {{ field }}
+               {% if field.errors %}
+                  <span class="error">{{ field.errors }}</span>
+               {% endif %}
+            </p>
+         {% endif %}
+      {% endfor %}
+
+      <!-- Image field separately -->
+      <p>
+         {{ form.image.label_tag }}<br>
+         {{ form.image }}
+         {% if form.image.errors %}
+            <span class="error">{{ form.image.errors }}</span>
+         {% endif %}
+      </p>
+
+      <button type="submit" class="btn">Submit Review</button>
+
+      <p>
+         <a href="{% url 'buyer_dashboard' %}">← Back</a>
+      </p>
+
+   </form>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">360° Virtual Tour</h1>
+            <div class="property-card">
+                <div class="content">
+                    <h3>{{ property.title }}</h3>
+                    <p><strong>Location:</strong> {{ property.city }}, {{ property.province }}</p>
+                    <p><strong>Price:</strong> ₱{{ property.price }}</p>
+                    <div class="tour-scene">
+                        {% if property.image %}
+                            <img src="{{ property.image.url }}" alt="Tour preview">
+                        {% else %}
+                            <img src="{% static 'images/hero-house.jpg' %}" alt="Tour preview">
+                        {% endif %}
+                        {% for hotspot in hotspots %}
+                        <span class="hotspot" style="top: {{ hotspot.y }}; left: {{ hotspot.x }};">{{ hotspot.label }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'property_detail' property.id %}" class="view-btn">Back to Details</a>
+                        <a href="#" class="view-btn">Full Screen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+</body>
+</html>

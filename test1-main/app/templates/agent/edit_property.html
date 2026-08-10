@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Property</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<section class="form-container">
+
+    <form method="POST" enctype="multipart/form-data" class="add-property-form">
+        {% csrf_token %}
+        
+        <h3>Edit Property</h3>
+
+        <!-- Render all form fields except image -->
+        {% for field in form %}
+            {% if field.name != "image" %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.errors %}
+                        <span class="error">{{ field.errors }}</span>
+                    {% endif %}
+                </p>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Main Image -->
+        <p>
+            {{ form.image.label_tag }}<br>
+            {{ form.image }}
+            {% if property.image %}
+                <br>
+                <img src="{{ property.image.url }}" alt="Main Image" width="150">
+            {% endif %}
+        </p>
+
+       <!-- ✅ EXISTING MULTIPLE IMAGES WITH DELETE OPTION -->
+        {% if property.images.all %}
+            <p><strong>Existing Gallery Images:</strong></p>
+            <div class="existing-images">
+                {% for img in property.images.all %}
+                    <div style="display:inline-block; margin:10px;">
+                        <img src="{{ img.image.url }}" width="120"><br>
+
+                        <!-- DELETE CHECKBOX -->
+                        <label>
+                            <input type="checkbox" name="delete_images" value="{{ img.id }}">
+                            Delete
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- ✅ ADD NEW MULTIPLE IMAGES -->
+        <p>
+            <label>Add More Images</label><br>
+            <input type="file" name="images" multiple>
+        </p>
+
+        <button type="submit" class="btn">Save Changes</button>
+
+        <p>
+            <a href="{% url 'agent_dashboard' %}">← Back to Dashboard</a>
+        </p>
+    </form>
+
+</section>
+
+</body>
+</html>

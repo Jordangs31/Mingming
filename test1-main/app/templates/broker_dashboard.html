@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Broker Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="navbar nav-1">
+        <div class="flex">
+            <a href="#" class="logo">
+                <i class="fas fa-building"></i> Broker MIS
+            </a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="inline-btn">Logout</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="heading">
+        <h1>Welcome {{ user.first_name }} ({{ user.user_type|capfirst }})</h1>
+        <p>Manage agents and property listings below.</p>
+    </section>
+
+    <section class="search-page">
+        <div class="search-results">
+            <div class="box-container">
+                <div class="property-card">
+                    <div class="content">
+                        <h3>Active Agents</h3>
+                        <p>{{ agents.count }}</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <div class="content">
+                        <h3>Approved Listings</h3>
+                        <p>{{ agents|length }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="search-page">
+        <div class="search-results">
+            <div style="margin-bottom: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="{% url 'manage_agents' %}" class="btn">Manage Agents</a>
+                <a href="{% url 'manage_properties' %}" class="btn">Manage Properties</a>
+            </div>
+        </div>
+    </section>
+
+   <section class="listings">
+    <div class="box-container">
+
+        {% for agent in agents %}
+        <div class="box">
+            <div class="admin">
+                <h3>{{ agent.first_name|slice:":1" }}</h3>
+                <p>{{ agent.first_name }}</p>
+
+                {% if agent.is_active %}
+                    <span style="color:green;">Active</span>
+                {% else %}
+                    <span style="color:red;">Inactive</span>
+                {% endif %}
+            </div>
+
+            <div class="thumb">
+                <img src="{% static 'images/property1.jpg' %}" alt="Agent Image">
+
+                <div class="total-images">
+                    <i class="fas fa-home"></i>
+                    {{ agent.property_set.count }} Properties
+                </div>
+
+                <div class="type">
+                    <span>{{ agent.user_type|capfirst }}</span>
+                </div>
+            </div>
+
+            <div class="name">{{ agent.email }}</div>
+
+            <div class="location">
+                <i class="fas fa-phone"></i> {{ agent.phone }}
+            </div>
+        </div>
+        {% empty %}
+        <p>No active agents found.</p>
+        {% endfor %}
+
+    </div>
+</section>
+</main>
+{% include 'components/footer.html' %}
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

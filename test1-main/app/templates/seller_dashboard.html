@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    {% include 'components/header.html' %}
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Seller Dashboard Overview</h1>
+            <div class="box-container">
+                <div class="property-card"><div class="content"><h3>Total Properties</h3><p>{{ total_properties }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Active Listings</h3><p>{{ active_listings }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Sold Properties</h3><p>{{ sold_properties }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Pending Approval</h3><p>{{ pending_approval }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Total Views</h3><p>{{ total_views }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Total Inquiries</h3><p>{{ total_inquiries }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Total Appointments</h3><p>{{ total_appointments }}</p></div></div>
+                <div class="property-card"><div class="content"><h3>Monthly Revenue</h3><p>{{ monthly_revenue }}</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Approval Queue</h1>
+            <div class="box-container">
+                {% for property in approval_queue %}
+                <div class="property-card">
+                    <div class="content">
+                        <h3>{{ property.title }}</h3>
+                        <p>{{ property.city }}, {{ property.province }}</p>
+                        <p>Agent: {{ property.agent.first_name|default:property.agent.username }}</p>
+                        <div class="flex">
+                            <a href="{% url 'approve_property' property.id %}" class="btn">Approve</a>
+                            <a href="{% url 'reject_property' property.id %}" class="btn">Reject</a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No listings waiting for review.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="search-page">
+        <div class="search-results">
+            <h1 class="heading">Recent Activities</h1>
+            <div class="box-container">
+                {% for activity in recent_activities %}
+                <div class="property-card">
+                    <div class="content">
+                        <p>{{ activity }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No recent activities.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html' %}
+</body>
+</html>
