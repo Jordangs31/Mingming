@@ -1,36 +1,19 @@
-[09/Aug/2026 17:59:32] "GET / HTTP/1.1" 200 34613
-[09/Aug/2026 17:59:32,116] - Broken pipe from ('127.0.0.1', 59534)
-[10/Aug/2026 21:22:21] "GET / HTTP/1.1" 200 34613
-[10/Aug/2026 21:22:21] "GET /static/css/style.css HTTP/1.1" 200 40126
-[10/Aug/2026 21:22:21] "GET /static/images/logo.png HTTP/1.1" 200 144683
-[10/Aug/2026 21:22:21] "GET /static/images/hero-house.jpg HTTP/1.1" 200 74288
-[10/Aug/2026 21:22:21] "GET /media/property_images/house-img-6.webp HTTP/1.1" 200 218646
-[10/Aug/2026 21:22:21] "GET /static/js/script.js HTTP/1.1" 200 2898
-[10/Aug/2026 21:22:21] "GET /media/property_images/house-img-4.webp HTTP/1.1" 200 109804
+[15/Aug/2026 02:00:38] "GET / HTTP/1.1" 200 34613
+[15/Aug/2026 02:00:39,108] - Broken pipe from ('127.0.0.1', 57268)
+[15/Aug/2026 02:00:45] "GET / HTTP/1.1" 200 34613
+[15/Aug/2026 02:00:45] "GET /static/css/style.css HTTP/1.1" 200 40126
+[15/Aug/2026 02:00:45] "GET /static/images/hero-house.jpg HTTP/1.1" 200 74288
+[15/Aug/2026 02:00:45] "GET /static/images/logo.png HTTP/1.1" 200 144683
+[15/Aug/2026 02:00:45] "GET /static/js/script.js HTTP/1.1" 200 2898
+[15/Aug/2026 02:00:45] "GET /media/property_images/house-img-6.webp HTTP/1.1" 200 218646
+[15/Aug/2026 02:00:45] "GET /media/property_images/house-img-4.webp HTTP/1.1" 200 109804
 Not Found: /favicon.ico
-[10/Aug/2026 21:22:21] "GET /favicon.ico HTTP/1.1" 404 12553
-[10/Aug/2026 21:22:45] "GET /property/20/ HTTP/1.1" 200 9409
-[10/Aug/2026 21:22:57] "GET /home/ HTTP/1.1" 200 34613
-[10/Aug/2026 21:23:57] "GET /contact/ HTTP/1.1" 200 5541
-[10/Aug/2026 21:23:57] "GET /static/images/contact-img.svg HTTP/1.1" 200 43273
-[10/Aug/2026 21:23:58] "GET /about/ HTTP/1.1" 200 7755
-[10/Aug/2026 21:23:58] "GET /static/images/default.png HTTP/1.1" 404 1868
-[10/Aug/2026 21:23:58] "GET /static/images/step-1.png HTTP/1.1" 200 4956
-[10/Aug/2026 21:23:58] "GET /static/images/step-3.png HTTP/1.1" 200 5304
-[10/Aug/2026 21:23:58] "GET /media/reviews/445629022_498900692583206_3656246392399106988_n.jpg HTTP/1.1" 200 20988
-[10/Aug/2026 21:23:58] "GET /static/images/about-img.svg HTTP/1.1" 200 55123
-[10/Aug/2026 21:23:58] "GET /static/images/step-2.png HTTP/1.1" 200 5193
-[10/Aug/2026 21:24:00] "GET /agent/agents/ HTTP/1.1" 200 7331
-[10/Aug/2026 21:24:13] "GET /agent/agents/?q=&location=&specialization=&experience=1&sort=name HTTP/1.1" 200 3169
-[10/Aug/2026 21:24:27] "GET /home/ HTTP/1.1" 200 34613
-[10/Aug/2026 21:27:05] "GET /search/ HTTP/1.1" 200 7825
-[10/Aug/2026 21:27:05] "GET /static/images/no-image.png HTTP/1.1" 404 1871
-[10/Aug/2026 21:50:25] "GET / HTTP/1.1" 200 34613
-[10/Aug/2026 21:50:25] "GET /static/css/style.css HTTP/1.1" 200 40126
-[10/Aug/2026 21:50:25] "GET /static/images/logo.png HTTP/1.1" 200 144683
-[10/Aug/2026 21:50:25] "GET /static/images/hero-house.jpg HTTP/1.1" 200 74288
-[10/Aug/2026 21:50:26] "GET /static/js/script.js HTTP/1.1" 200 2898
-[10/Aug/2026 21:50:26] "GET /media/property_images/house-img-6.webp HTTP/1.1" 200 218646
-[10/Aug/2026 21:50:26] "GET /media/property_images/house-img-4.webp HTTP/1.1" 200 109804
-Not Found: /favicon.ico
-[10/Aug/2026 21:50:28] "GET /favicon.ico HTTP/1.1" 404 12553
+[15/Aug/2026 02:00:48] "GET /favicon.ico HTTP/1.1" 404 12553
+[15/Aug/2026 02:03:08] "GET / HTTP/1.1" 200 34613
+[15/Aug/2026 02:03:32] "GET / HTTP/1.1" 200 34613
+[15/Aug/2026 02:04:16] "GET / HTTP/1.1" 200 34613
+[15/Aug/2026 02:08:11] "GET / HTTP/1.1" 200 34613
+[15/Aug/2026 02:08:11] "GET /static/css/home.css HTTP/1.1" 200 5541
+[15/Aug/2026 02:08:11,750] - Broken pipe from ('127.0.0.1', 65098)
+[15/Aug/2026 02:08:20] "GET / HTTP/1.1" 200 34613
+[15/Aug/2026 02:08:22,844] - Broken pipe from ('127.0.0.1', 65100)
